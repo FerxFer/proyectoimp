@@ -28,4 +28,16 @@ public class CarritoController {
                                    @RequestParam Integer cantidad) {
         return carritoService.agregarProducto(carritoId, productoId, cantidad);
     }
+
+    @DeleteMapping("/{carritoId}/items/{itemId}")
+    public Carrito eliminarProducto(@PathVariable Long carritoId, @PathVariable Long itemId) {
+        return carritoService.eliminarProducto(carritoId, itemId);
+    }
+
+    @PutMapping("/{carritoId}/items/{itemId}")
+    public Carrito actualizarCantidad(@PathVariable Long carritoId,
+                                      @PathVariable Long itemId,
+                                      @RequestParam Integer cantidad) {
+        return carritoService.actualizarCantidad(carritoId, itemId, cantidad);
+    }
 }
