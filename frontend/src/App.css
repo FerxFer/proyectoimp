@@ -59,3 +59,30 @@ h1 {
 .producto-card button:hover {
   background-color: #e65c00;
 }
+
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filtros button {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filtros button:hover {
+  background-color: #f0f0f0;
+}
+
+.filtros button.activo {
+  background-color: #ff6600;
+  color: white;
+  border-color: #ff6600;
+}

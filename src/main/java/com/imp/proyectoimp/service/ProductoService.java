@@ -28,4 +28,9 @@ public class ProductoService {
     public void eliminar(Long id) {
         productoRepository.deleteById(id);
     }
+
+    public Producto actualizar(Long id, Producto productoActualizado) {
+        productoActualizado.setId(id);
+        return productoRepository.save(productoActualizado);
+    }
 }
