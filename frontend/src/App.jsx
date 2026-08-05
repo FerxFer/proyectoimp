@@ -39,37 +39,41 @@ function App() {
         : productos
 
     return (
-        <div>
-            <h1>Catálogo de productos</h1>
+        <div className="layout">
+            <header className="header">
+                <h1>Catálogo de productos</h1>
+                {carrito && (
+                    <p className="carrito-info">🛒 {carrito.items.length} items — ${carrito.total}</p>
+                )}
+            </header>
 
-            {carrito && (
-                <p style={{ textAlign: 'center' }}>
-                    🛒 Items en carrito: {carrito.items.length} — Total: ${carrito.total}
-                </p>
-            )}
+            <div className="contenido">
+                <aside className="sidebar">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li
+                            className={categoriaSeleccionada === null ? 'activo' : ''}
+                            onClick={() => setCategoriaSeleccionada(null)}
+                        >
+                            Todas
+                        </li>
+                        {categorias.map(cat => (
+                            <li
+                                key={cat.id}
+                                className={categoriaSeleccionada === cat.id ? 'activo' : ''}
+                                onClick={() => setCategoriaSeleccionada(cat.id)}
+                            >
+                                {cat.nombre}
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
 
-            <div className="filtros">
-                <button
-                    className={categoriaSeleccionada === null ? 'activo' : ''}
-                    onClick={() => setCategoriaSeleccionada(null)}
-                >
-                    Todas
-                </button>
-                {categorias.map(cat => (
-                    <button
-                        key={cat.id}
-                        className={categoriaSeleccionada === cat.id ? 'activo' : ''}
-                        onClick={() => setCategoriaSeleccionada(cat.id)}
-                    >
-                        {cat.nombre}
-                    </button>
-                ))}
-            </div>
-
-            <div className="catalogo">
-                {productosFiltrados.map(producto => (
-                    <ProductoCard key={producto.id} producto={producto} onAgregar={agregarAlCarrito} />
-                ))}
+                <main className="catalogo">
+                    {productosFiltrados.map(producto => (
+                        <ProductoCard key={producto.id} producto={producto} onAgregar={agregarAlCarrito} />
+                    ))}
+                </main>
             </div>
         </div>
     )
