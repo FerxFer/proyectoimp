@@ -6,6 +6,8 @@ function App() {
     const [productos, setProductos] = useState([])
     const [categorias, setCategorias] = useState([])
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null)
+    const [carritoId, setCarritoId] = useState(null)
+    const [carrito, setCarrito] = useState(null)
 
     useEffect(() => {
         fetch('http://localhost:8080/api/productos')
@@ -15,7 +17,22 @@ function App() {
         fetch('http://localhost:8080/api/categorias')
             .then(res => res.json())
             .then(data => setCategorias(data))
+
+        fetch('http://localhost:8080/api/carritos', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                setCarritoId(data.id)
+                setCarrito(data)
+            })
     }, [])
+
+    const agregarAlCarrito = (productoId) => {
+        fetch(`http://localhost:8080/api/carritos/${carritoId}/items?productoId=${productoId}&cantidad=1`, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => setCarrito(data))
+    }
 
     const productosFiltrados = categoriaSeleccionada
         ? productos.filter(p => p.categoria && p.categoria.id === categoriaSeleccionada)
@@ -24,6 +41,12 @@ function App() {
     return (
         <div>
             <h1>Catálogo de productos</h1>
+
+            {carrito && (
+                <p style={{ textAlign: 'center' }}>
+                    🛒 Items en carrito: {carrito.items.length} — Total: ${carrito.total}
+                </p>
+            )}
 
             <div className="filtros">
                 <button
@@ -45,7 +68,7 @@ function App() {
 
             <div className="catalogo">
                 {productosFiltrados.map(producto => (
-                    <ProductoCard key={producto.id} producto={producto} />
+                    <ProductoCard key={producto.id} producto={producto} onAgregar={agregarAlCarrito} />
                 ))}
             </div>
         </div>
