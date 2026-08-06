@@ -20,12 +20,24 @@ function App() {
             .then(res => res.json())
             .then(data => setCategorias(data))
 
-        fetch('http://localhost:8080/api/carritos', { method: 'POST' })
-            .then(res => res.json())
-            .then(data => {
-                setCarritoId(data.id)
-                setCarrito(data)
-            })
+        const idGuardado = localStorage.getItem('carritoId')
+
+        if (idGuardado) {
+            fetch(`http://localhost:8080/api/carritos/${idGuardado}`)
+                .then(res => res.json())
+                .then(data => {
+                    setCarritoId(data.id)
+                    setCarrito(data)
+                })
+        } else {
+            fetch('http://localhost:8080/api/carritos', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    setCarritoId(data.id)
+                    setCarrito(data)
+                    localStorage.setItem('carritoId', data.id)
+                })
+        }
     }, [])
 
     const agregarAlCarrito = (productoId) => {
