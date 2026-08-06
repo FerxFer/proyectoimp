@@ -28,6 +28,15 @@ public class CarritoService {
         Carrito carrito = obtenerCarrito(carritoId);
         Producto producto = productoService.buscarPorId(productoId);
 
+        int cantidadEnCarrito = carrito.getItems().stream()
+                .filter(item -> item.getProducto().getId().equals(productoId))
+                .mapToInt(ItemCarrito::getCantidad)
+                .sum();
+
+        if (cantidadEnCarrito + cantidad > producto.getStock()) {
+            throw new RuntimeException("Stock insuficiente. Disponible: " + producto.getStock());
+        }
+
         ItemCarrito item = new ItemCarrito();
         item.setProducto(producto);
         item.setCantidad(cantidad);
@@ -47,7 +56,12 @@ public class CarritoService {
         carrito.getItems().stream()
                 .filter(item -> item.getId().equals(itemId))
                 .findFirst()
-                .ifPresent(item -> item.setCantidad(nuevaCantidad));
+                .ifPresent(item -> {
+                    if (nuevaCantidad > item.getProducto().getStock()) {
+                        throw new RuntimeException("Stock insuficiente. Disponible: " + item.getProducto().getStock());
+                    }
+                    item.setCantidad(nuevaCantidad);
+                });
         return carritoRepository.save(carrito);
     }
 }

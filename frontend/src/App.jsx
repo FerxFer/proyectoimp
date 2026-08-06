@@ -32,8 +32,14 @@ function App() {
         fetch(`http://localhost:8080/api/carritos/${carritoId}/items?productoId=${productoId}&cantidad=1`, {
             method: 'POST'
         })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    return res.text().then(msg => { throw new Error(msg) })
+                }
+                return res.json()
+            })
             .then(data => setCarrito(data))
+            .catch(err => alert(err.message))
     }
 
     const eliminarDelCarrito = (itemId) => {
@@ -49,8 +55,14 @@ function App() {
         fetch(`http://localhost:8080/api/carritos/${carritoId}/items/${itemId}?cantidad=${nuevaCantidad}`, {
             method: 'PUT'
         })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    return res.text().then(msg => { throw new Error(msg) })
+                }
+                return res.json()
+            })
             .then(data => setCarrito(data))
+            .catch(err => alert(err.message))
     }
 
     const productosFiltrados = categoriaSeleccionada

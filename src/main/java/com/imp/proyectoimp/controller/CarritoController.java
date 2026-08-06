@@ -40,4 +40,9 @@ public class CarritoController {
                                       @RequestParam Integer cantidad) {
         return carritoService.actualizarCantidad(carritoId, itemId, cantidad);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public org.springframework.http.ResponseEntity<String> manejarError(RuntimeException e) {
+        return org.springframework.http.ResponseEntity.badRequest().body(e.getMessage());
+    }
 }
