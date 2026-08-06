@@ -213,3 +213,20 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.pagar-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #009ee3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pagar-btn:hover {
+  background-color: #0080c0;
+}

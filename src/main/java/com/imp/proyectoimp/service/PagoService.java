@@ -30,8 +30,16 @@ public class PagoService {
             items.add(itemRequest);
         });
 
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                .success("http://localhost:5173/pago-exitoso")
+                .failure("http://localhost:5173/pago-fallido")
+                .pending("http://localhost:5173/pago-pendiente")
+                .build();
+
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)
+                .backUrls(backUrls)
+                //.autoReturn("approved")
                 .build();
 
         PreferenceClient client = new PreferenceClient();

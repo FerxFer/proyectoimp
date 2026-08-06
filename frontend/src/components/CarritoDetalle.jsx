@@ -1,5 +1,13 @@
-function CarritoDetalle({ carrito, onEliminar, onActualizarCantidad, onCerrar }) {
+function CarritoDetalle({ carrito, carritoId, onEliminar, onActualizarCantidad, onCerrar }) {
     if (!carrito) return null
+
+    const pagar = () => {
+        fetch(`http://localhost:8080/api/pagos/${carritoId}`, { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                window.location.href = data.linkPago
+            })
+    }
 
     return (
         <div className="carrito-overlay" onClick={onCerrar}>
@@ -26,6 +34,9 @@ function CarritoDetalle({ carrito, onEliminar, onActualizarCantidad, onCerrar })
                 <div className="carrito-total">
                     Total: {carrito.total?.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}
                 </div>
+                {carrito.items.length > 0 && (
+                    <button className="pagar-btn" onClick={pagar}>Pagar</button>
+                )}
                 <button className="cerrar-btn" onClick={onCerrar}>Cerrar</button>
             </div>
         </div>
