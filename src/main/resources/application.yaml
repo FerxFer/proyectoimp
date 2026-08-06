@@ -7,3 +7,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+mercadopago:
+  access-token: ${MP_ACCESS_TOKEN}

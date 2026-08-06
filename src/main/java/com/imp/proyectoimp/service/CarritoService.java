@@ -7,6 +7,8 @@ import com.imp.proyectoimp.repository.CarritoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CarritoService {
 
@@ -28,20 +30,25 @@ public class CarritoService {
         Carrito carrito = obtenerCarrito(carritoId);
         Producto producto = productoService.buscarPorId(productoId);
 
-        int cantidadEnCarrito = carrito.getItems().stream()
+        Optional<ItemCarrito> itemExistente = carrito.getItems().stream()
                 .filter(item -> item.getProducto().getId().equals(productoId))
-                .mapToInt(ItemCarrito::getCantidad)
-                .sum();
+                .findFirst();
 
-        if (cantidadEnCarrito + cantidad > producto.getStock()) {
+        int cantidadActual = itemExistente.map(ItemCarrito::getCantidad).orElse(0);
+
+        if (cantidadActual + cantidad > producto.getStock()) {
             throw new RuntimeException("Stock insuficiente. Disponible: " + producto.getStock());
         }
 
-        ItemCarrito item = new ItemCarrito();
-        item.setProducto(producto);
-        item.setCantidad(cantidad);
+        if (itemExistente.isPresent()) {
+            itemExistente.get().setCantidad(cantidadActual + cantidad);
+        } else {
+            ItemCarrito item = new ItemCarrito();
+            item.setProducto(producto);
+            item.setCantidad(cantidad);
+            carrito.getItems().add(item);
+        }
 
-        carrito.getItems().add(item);
         return carritoRepository.save(carrito);
     }
 
