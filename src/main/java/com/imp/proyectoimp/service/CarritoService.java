@@ -64,7 +64,8 @@ public class CarritoService {
                 .filter(item -> item.getId().equals(itemId))
                 .findFirst()
                 .ifPresent(item -> {
-                    if (nuevaCantidad > item.getProducto().getStock()) {
+                    int cantidadActual = item.getCantidad();
+                    if (nuevaCantidad > cantidadActual && nuevaCantidad > item.getProducto().getStock()) {
                         throw new RuntimeException("Stock insuficiente. Disponible: " + item.getProducto().getStock());
                     }
                     item.setCantidad(nuevaCantidad);

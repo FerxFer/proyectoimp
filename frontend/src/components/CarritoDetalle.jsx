@@ -12,7 +12,7 @@ function CarritoDetalle({ carrito, carritoId, onEliminar, onActualizarCantidad, 
     return (
         <div className="carrito-overlay" onClick={onCerrar}>
             <div className="carrito-panel" onClick={(e) => e.stopPropagation()}>
-                <h2>Tu carrito</h2>
+                <h2 className="carrito-panel-titulo">Tu carrito</h2>
                 {carrito.items.length === 0 ? (
                     <p>El carrito está vacío</p>
                 ) : (

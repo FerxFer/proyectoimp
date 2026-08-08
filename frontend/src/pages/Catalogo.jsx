@@ -83,6 +83,10 @@ function Catalogo() {
     return (
         <div className="layout">
             <header className="header">
+                <div className="logo">
+                    <span className="logo-icon">🦽</span>
+                    <span className="logo-texto">BL <strong>Importaciones</strong></span>
+                </div>
                 <h1>Catálogo de productos</h1>
                 {carrito && (
                     <p className="carrito-info" onClick={() => setMostrarCarrito(true)}>
@@ -90,6 +94,10 @@ function Catalogo() {
                     </p>
                 )}
             </header>
+
+            <div className="banner">
+                <p>🚚 Envíos a todo el país — Pagá con Mercado Pago en cuotas</p>
+            </div>
 
             <div className="contenido">
                 <aside className="sidebar">
