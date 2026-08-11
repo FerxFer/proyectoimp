@@ -10,3 +10,4 @@ spring:
 
 mercadopago:
   access-token: ${MP_ACCESS_TOKEN}
+  webhook-secret: ${MP_WEBHOOK_SECRET}
