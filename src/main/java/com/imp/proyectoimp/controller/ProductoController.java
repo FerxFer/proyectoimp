@@ -24,6 +24,11 @@ public class ProductoController {
         return productoService.guardar(producto);
     }
 
+    @GetMapping("/buscar")
+    public List<Producto> buscarPorTexto(@RequestParam String texto) {
+        return productoService.buscarPorNombre(texto);
+    }
+
     @GetMapping("/{id}")
     public Producto buscar(@PathVariable Long id) {
         return productoService.buscarPorId(id);

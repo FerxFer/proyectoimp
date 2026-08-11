@@ -33,4 +33,8 @@ public class ProductoService {
         productoActualizado.setId(id);
         return productoRepository.save(productoActualizado);
     }
+
+    public List<Producto> buscarPorNombre(String texto) {
+        return productoRepository.findByNombreContainingIgnoreCase(texto);
+    }
 }

@@ -9,6 +9,7 @@ function Catalogo() {
     const [carritoId, setCarritoId] = useState(null)
     const [carrito, setCarrito] = useState(null)
     const [mostrarCarrito, setMostrarCarrito] = useState(false)
+    const [textoBusqueda, setTextoBusqueda] = useState('')
 
     useEffect(() => {
         fetch('http://localhost:8080/api/productos')
@@ -75,11 +76,12 @@ function Catalogo() {
             .then(data => setCarrito(data))
             .catch(err => alert(err.message))
     }
+    const normalizar = (texto) =>
+        texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 
-    const productosFiltrados = categoriaSeleccionada
-        ? productos.filter(p => p.categoria && p.categoria.id === categoriaSeleccionada)
-        : productos
-
+    const productosFiltrados = productos
+        .filter(p => categoriaSeleccionada === null || (p.categoria && p.categoria.id === categoriaSeleccionada))
+        .filter(p => normalizar(p.nombre).includes(normalizar(textoBusqueda)))
     return (
         <div className="layout">
             <header className="header">
@@ -88,6 +90,13 @@ function Catalogo() {
                     <span className="logo-texto">BL <strong>Importaciones</strong></span>
                 </div>
                 <h1>Catálogo de productos</h1>
+                <input
+                    type="text"
+                    placeholder="Buscar productos..."
+                    value={textoBusqueda}
+                    onChange={(e) => setTextoBusqueda(e.target.value)}
+                    className="buscador-input"
+                />
                 {carrito && (
                     <p className="carrito-info" onClick={() => setMostrarCarrito(true)}>
                         🛒 {carrito.items.length} items — {carrito.total?.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}
