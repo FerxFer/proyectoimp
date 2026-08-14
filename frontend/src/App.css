@@ -402,3 +402,172 @@ body {
 .pago-boton:hover {
   background-color: #e65c00;
 }
+
+.detalle-layout {
+  color: #1A1A2E;
+}
+
+.detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.detalle-volver {
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.detalle-contenido {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 40px;
+  padding: 40px 24px;
+}
+
+.detalle-imagen {
+  flex: 1;
+}
+
+.detalle-imagen img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #eee;
+}
+
+.detalle-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detalle-categoria {
+  color: #ff6600;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.detalle-precio-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalle-precio {
+  font-size: 32px;
+  font-weight: 700;
+  color: #e60000;
+}
+
+.detalle-cuotas {
+  color: #00b67a;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.badge-en-stock {
+  color: #00b67a;
+  font-weight: 600;
+}
+
+.badge-stock-bajo {
+  color: #e60000;
+  font-weight: 600;
+}
+
+.badge-sin-stock {
+  color: #999;
+  font-weight: 600;
+}
+
+.detalle-envio {
+  font-size: 14px;
+  color: #555;
+}
+
+.detalle-boton-agregar {
+  padding: 14px 24px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.detalle-boton-agregar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.detalle-descripcion-completa {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+}
+
+.detalle-relacionados {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+}
+
+.detalle-relacionados h2 {
+  color: #1A1A2E;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.detalle-relacionados-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.relacionado-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: #1A1A2E;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.relacionado-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.relacionado-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.relacionado-nombre {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.relacionado-precio {
+  color: #e60000;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0;
+}

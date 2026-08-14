@@ -4,6 +4,7 @@ import PagoExitoso from './pages/PagoExitoso'
 import PagoFallido from './pages/PagoFallido'
 import PagoPendiente from './pages/PagoPendiente'
 import './App.css'
+import ProductoDetalle from './pages/ProductoDetalle'
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <Route path="/pago-exitoso" element={<PagoExitoso />} />
             <Route path="/pago-fallido" element={<PagoFallido />} />
             <Route path="/pago-pendiente" element={<PagoPendiente />} />
+            <Route path="/producto/:id" element={<ProductoDetalle />} />
         </Routes>
     )
 }
